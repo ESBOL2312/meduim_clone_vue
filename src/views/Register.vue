@@ -86,7 +86,7 @@
                         </el-alert>
                     </div>
                     <el-form-item>
-                        <el-button :disabled="$v.validationGroup.$invalid"   @click="sendForm" type="primary">send</el-button>
+                        <el-button :disabled="$v.validationGroup.$invalid" :loading="isSubmit" @click="sendForm" type="primary">send</el-button>
                     </el-form-item>
                 </el-form>
             </el-col>
@@ -118,16 +118,29 @@ export default {
         },
         password: {
             required,
-            minLength: minLength(6)
+            minLength: minLength(8)
         },
         repeatPassword: {
             sameAsPassword: sameAs('password')
         },
         validationGroup:['name','email','password','repeatPassword']
     },
+    computed:{
+        isSubmit(){
+            return this.$store.state.auth.isSubmit
+        }
+    },
     methods:{
     sendForm(){
-            console.log('1')
+        const data  = {
+            email: this.email,
+            username: this.name,
+            password: this.password
+        }
+        this.$store.dispatch('registerUser', data)
+        .then(user=>{
+            this.$router.push({name:'home'})
+        })
         }
     }
 }
@@ -147,21 +160,21 @@ export default {
   animation-timing-function: ease-in-out;
     }
     @keyframes shakeError {
-  0% {
-    transform: translateX(0); }
-  15% {
-    transform: translateX(0.375rem); }
-  30% {
-    transform: translateX(-0.375rem); }
-  45% {
-    transform: translateX(0.375rem); }
-  60% {
-    transform: translateX(-0.375rem); }
-  75% {
-    transform: translateX(0.375rem); }
-  90% {
-    transform: translateX(-0.375rem); }
-  100% {
-    transform: translateX(0); }
+        0% {
+            transform: translateX(0); }
+        15% {
+            transform: translateX(0.375rem); }
+        30% {
+            transform: translateX(-0.375rem); }
+        45% {
+            transform: translateX(0.375rem); }
+        60% {
+            transform: translateX(-0.375rem); }
+        75% {
+            transform: translateX(0.375rem); }
+        90% {
+            transform: translateX(-0.375rem); }
+        100% {
+            transform: translateX(0); }
     }
 </style>
