@@ -7,6 +7,16 @@
         </el-row>
         <el-row type="flex" justify="center">
             <el-col :span="6">
+                <div v-if="regError">
+                    <el-alert
+                        v-for="(v, k, i) in regError" :key="i"
+                        class="mb-1"
+                        :title="'this '+k +' '+v"
+                        type="error"
+                        :show-icon="false"
+                        :closable="false">
+                    </el-alert>
+                </div>
                 <el-form  class="demo-form-inline">
                     <el-form-item label="name" >
                         <el-input  placeholder="Name" v-model.trim="$v.name.$model" :class="{ 'form-group--error': $v.name.$error }">
@@ -128,6 +138,9 @@ export default {
     computed:{
         isSubmit(){
             return this.$store.state.auth.isSubmit
+        },
+        regError(){
+            return this.$store.state.auth.validationErrors
         }
     },
     methods:{
@@ -146,6 +159,9 @@ export default {
 }
 </script>
 <style>
+.mb-1{
+    margin-bottom: 15px !important;
+}
     .form-group--error{
         border-radius: 1px solid red;
     }
