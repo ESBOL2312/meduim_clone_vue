@@ -1,10 +1,15 @@
 import authApi from '@/api/auth'
 import {setItem} from '@/service/index'
+import auth from '../api/auth'
 const state = {
     isSubmit:false,
     currentUser: null,
     validationErrors: null,
-    isLoggedIn: null
+    isLoggedIn: null,
+
+    loginLoading:false,
+    loginErrors: null,
+    isLogin: false,
 }
 const mutations = {
     registerStart(state){
@@ -19,6 +24,20 @@ const mutations = {
     registerFailed(state, payload){
         state.isSubmit = false
         state.validationErrors = payload
+    },
+
+    loginStart(state){
+        state.loginLoading = true
+        state.validationErrors = null
+    },
+    loginSuccess(state, payload){
+        state.loginLoading = false
+        state.currentUser = payload
+        state.isLoggedIn = true
+    },
+    loginFailed(state, payload){
+        state.loginLoading = false
+        state.loginErrors = payload
     }
 }
 const actions = {
@@ -36,7 +55,21 @@ const actions = {
                 context.commit('registerFailed', result.response.data.errors)
             })
         })
+    },
+    loginUser(context,data){
+        return new Promise(resolve=>{
+            context.commit('loginStart')
+            authApi.login(data).then(response=>{
+                context.commit('loginSuccess', response)
+                setItem('acTn',response.data.user.token)
+                resolve(response.data.user)
+            })
+            .catch(result=>{
+                context.commit('loginFailed', result.response.data.errors)
+            })
+        })
     }
+
 }
 export default{
     state,
