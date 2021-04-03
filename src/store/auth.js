@@ -11,6 +11,9 @@ const state = {
     loginErrors: null,
     isLogin: false,
 }
+const getters = {
+    isLogin: state => state.isLoggedIn
+}
 const mutations = {
     registerStart(state){
         state.isSubmit = true
@@ -74,5 +77,6 @@ const actions = {
 export default{
     state,
     mutations,
-    actions
+    actions,
+    getters
 }
