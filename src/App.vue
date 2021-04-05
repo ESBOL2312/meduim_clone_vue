@@ -2,8 +2,7 @@
   <div id="app" class="container mx-auto">
     <el-container>
       <el-header>
-        <header-top :menu-list="menuItems">
-          
+        <header-top :menu-list="menuItems" :user-info="currentUser">
         </header-top>
         <router-link :to="{name:'home'}">
           medium
@@ -17,6 +16,7 @@
 </template>
 <script>
 import HeaderTop from '@/components/TopMenu.vue'
+import {mapActions, mapGetters} from 'vuex'
 export default {
   name:'MMain',
   data(){
@@ -58,6 +58,19 @@ export default {
   },
   components:{
     HeaderTop
+  },
+  computed:{
+    ...mapGetters([
+      'currentUser'
+    ])
+  },
+  methods:{
+    ...mapActions([
+      'getCurrentUser'
+    ])
+  }, 
+  created(){
+    this.getCurrentUser()
   }
 }
 </script>

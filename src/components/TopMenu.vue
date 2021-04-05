@@ -27,7 +27,7 @@
                     <template v-if="menuList.unAuthorized">
                         <template v-for="(item,i) in menuList.unAuthorized">
                             <el-menu-item :key="i" :index="i">
-                                <router-link :to="{name:item.routeName}" >
+                                <router-link :to={name:item.routeName} active-class="active-link" exact>
                                     <i :class="item.icon"></i>
                                     <span>
                                         {{item.title}}
@@ -39,19 +39,27 @@
                 </template>
                 <el-menu-item >
                     <router-link :to="{name:'home'}" >
-                        <el-avatar size="medium" src="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png"></el-avatar>
+                        <span>
+                            {{userInfo.data.user.username}}
+                        </span>
+                        <el-avatar size="medium" :src="userInfo.data.user.image"></el-avatar>
                     </router-link>
                 </el-menu-item>
             </el-menu>
         </el-col>
+        
     </el-row>
 </template>
 <script>
-import {mapGetters, MapGetters} from 'vuex'
+import {mapGetters} from 'vuex'
 export default {
     name:'MTopMenu',
     props:{
         menuList:{
+            required:true,
+            type:Object,
+        },
+        userInfo:{
             required:true,
             type:Object,
         }
@@ -80,5 +88,8 @@ export default {
 }
 .menu-item:hover{
     color:rgb(160, 23, 23);
+}
+.active-link{
+    color: crimson !important;
 }
 </style>
