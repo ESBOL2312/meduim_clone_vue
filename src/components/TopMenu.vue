@@ -1,19 +1,20 @@
 <template>
     <el-row type="flex" class="row-bg" justify="space-between">
         <el-col>
-            <router-link class="menu-item" :to="{name:'home'}">
+            <router-link class="menu-item" :to="{name:'home'}" active-class="active-link" exact>
                 <h1 class="logo">
                     Medium 
                 </h1>
             </router-link>
         </el-col>
         <el-col>
-            <el-menu v-if="menuList" class="el-menu-demo" mode="horizontal" >
+            {{}}
+            <el-menu v-if="isLoad" class="el-menu-demo" mode="horizontal" >
                 <template v-if="isLogin">
                     <template v-if="menuList.authorized">
                         <template v-for="(item,i) in menuList.authorized">
                             <el-menu-item :key="i" :index="i">
-                                <router-link :to={name:item.routeName} >
+                                <router-link :to={name:item.routeName} active-class="active-link" exact>
                                     <i :class="item.icon"></i>
                                     <span>
                                         {{item.title}}
@@ -37,7 +38,7 @@
                         </template>
                     </template>
                 </template>
-                <el-menu-item >
+                <el-menu-item>
                     <router-link :to="{name:'home'}" >
                         <span>
                             {{userInfo.data.user.username}}
@@ -67,7 +68,10 @@ export default {
     computed:{
         ...mapGetters([
             'isLogin'
-        ])
+        ]),
+        isLoad(){
+            return this.menuList && this.userInfo ? true:false
+        }
     }
 }
 </script>
