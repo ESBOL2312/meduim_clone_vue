@@ -18,8 +18,12 @@
       </div>
     </el-col>
     <el-col :span="8">
-      <div class="grid-content bg-purple">
-        {{tags}}
+      <div v-if="tags" class="grid-content bg-purple">
+        <div class="tag-list">
+          <el-tag v-for="tag in tags" :key="tag" >
+            {{tag}}
+          </el-tag>
+        </div>
       </div>
     </el-col>
   </el-row>
@@ -40,12 +44,15 @@ export default {
     FeedCard,
     UserCard
   },
+  filters:{
+  
+  },
   computed:{
     ...mapGetters([
       'getFeedList',
       'getFL',
       'tags'
-    ])
+    ]),
   },
   methods:{    
     ...mapActions([

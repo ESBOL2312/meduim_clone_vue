@@ -6,7 +6,7 @@ const state = {
 }
 const getters = {
     tagLoadState: state => state.tagsLoading,
-    tags:state=> state.tags['tags'],
+    tags:state=> state.tags['tags']
 }
 const mutations = {
     getTagsStart(state){
