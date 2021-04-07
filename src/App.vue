@@ -4,9 +4,6 @@
       <el-header>
         <header-top :menu-list="menuItems" :user-info="currentUser">
         </header-top>
-        <router-link :to="{name:'home'}">
-          medium
-        </router-link>
       </el-header>
       <el-main>
         <router-view/>
@@ -30,12 +27,12 @@ export default {
           },
           {
             'title':'new article',
-            'routeName':'home',
+            'routeName':'new-article',
             'icon':'el-icon-edit-outline'
           },
           {
             'title':'settings',
-            'routeName':'home',
+            'routeName':'settings',
             'icon':'el-icon-setting'
           }
         ],
@@ -61,12 +58,14 @@ export default {
   },
   computed:{
     ...mapGetters([
-      'currentUser'
-    ])
+      'currentUser',
+      ])
   },
   methods:{
     ...mapActions([
-      'getCurrentUser'
+      'getCurrentUser',
+      'getFeed',
+      'getSingleFeed'
     ])
   }, 
   created(){

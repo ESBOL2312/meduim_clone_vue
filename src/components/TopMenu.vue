@@ -8,7 +8,6 @@
             </router-link>
         </el-col>
         <el-col>
-            {{}}
             <el-menu v-if="isLoad" class="el-menu-demo" mode="horizontal" >
                 <template v-if="isLogin">
                     <template v-if="menuList.authorized">
@@ -40,10 +39,8 @@
                 </template>
                 <el-menu-item>
                     <router-link :to="{name:'home'}" >
-                        <span>
-                            {{userInfo.data.user.username}}
-                        </span>
-                        <el-avatar size="medium" :src="userInfo.data.user.image"></el-avatar>
+                        <user-card :user-name="userInfo.data.user.username" :user-img="userInfo.data.user.image">
+                        </user-card>
                     </router-link>
                 </el-menu-item>
             </el-menu>
@@ -53,8 +50,12 @@
 </template>
 <script>
 import {mapGetters} from 'vuex'
+import UserCard from '@/components/UserCard'
 export default {
     name:'MTopMenu',
+    components:{
+        UserCard
+    },
     props:{
         menuList:{
             required:true,

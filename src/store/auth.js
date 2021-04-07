@@ -1,6 +1,6 @@
 import authApi from '@/api/auth'
 import {setItem} from '@/service/index'
-import auth from '../api/auth'
+
 const state =   {
     getCULoading:false,
     isSubmit:false,
