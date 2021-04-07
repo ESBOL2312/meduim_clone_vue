@@ -19,6 +19,7 @@
     </el-col>
     <el-col :span="8">
       <div class="grid-content bg-purple">
+        {{tags}}
       </div>
     </el-col>
   </el-row>
@@ -42,12 +43,14 @@ export default {
   computed:{
     ...mapGetters([
       'getFeedList',
-      'getFL'
+      'getFL',
+      'tags'
     ])
   },
   methods:{    
     ...mapActions([
       'getFeed',
+      'getTag'
     ]),
     handleCurrentChange(val){
       let off = (val-1)*10;
@@ -55,7 +58,8 @@ export default {
     }
   },
   created(){
-    this.getFeed({limit:10,offset:0})
+    this.getFeed({limit:10,offset:0}),
+    this.getTag()
   }
 }
 </script>
