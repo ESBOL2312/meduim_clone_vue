@@ -27,14 +27,13 @@
         <p>
           {{feedData.description}}
         </p>
-        <span>Read more...</span>
-        <template v-if="feedData.tagList">
-          <ul v-for="(tag,c) in feedData.tagList" :key="c">
-            <li>
+        <div v-if="feedData.tagList" class="tag-list">
+            <el-tag v-for="(tag,c) in feedData.tagList" :key="c" effect="dark">
               {{tag}}
-            </li>
-          </ul>
-        </template>
+            </el-tag>
+        </div>
+        <br>
+        <span>Read more...</span>
       </a>
       <hr>
     </div>
@@ -71,5 +70,8 @@ export default {
 }
 .ju-r{
   justify-content: flex-end;
+}
+.tag-list .el-tag+.el-tag {
+    margin-left: 10px;
 }
 </style>
