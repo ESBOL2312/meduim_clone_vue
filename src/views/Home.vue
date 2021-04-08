@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-   <el-row :gutter="20">
+   <el-row :gutter="20" v-loading.fullscreen.lock="loading">
     <el-col :span="16">
       <div class="grid-content bg-purple">
         <div v-if="getFeedList">
@@ -9,11 +9,10 @@
           </div>
         </div>
         <el-pagination
-        v-loading="getFL" 
           background
           layout="prev, pager, next"
           :total="500"
-          @current-change="handleCurrentChange">
+          @current-change="handleCurrentChange" v-loading.fullscreen.lock="loading">
         </el-pagination>
       </div>
     </el-col>
@@ -37,7 +36,7 @@ export default {
   name: 'Home',
   data(){
     return{
-      loading:true
+      loading:false
     }
   },
   components: {
@@ -61,12 +60,22 @@ export default {
     ]),
     handleCurrentChange(val){
       let off = (val-1)*10;
-      this.getFeed({limit:10,offset:off})
+      this.loading = true
+      this.getFeed({limit:10,offset:off}).then((data)=>{
+        this.loading = false
+      })
     }
   },
   created(){
-    this.getFeed({limit:10,offset:0}),
+    this.loading = true
+    this.getFeed({limit:10,offset:0})
+    .then((data)=>{
+      this.loading = false
+    })
+    console.log(a)
     this.getTag()
+    console.log(a)
+
   }
 }
 </script>

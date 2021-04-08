@@ -38,7 +38,7 @@ const actions = {
             feedApi.getFeed(param)
             .then(response=>{
                 context.commit('getFeedSuccess',response.data)
-                resolve(response.dat)
+                resolve(response.data)
             })
             .catch(result=>{
                 context.commit('getFeedFailed',result)
@@ -51,7 +51,7 @@ const actions = {
             feedApi.getSingleFeed(slug)
             .then(response=>{
                 context.commit('getSingleFeedSuccess',response.data)
-                resolve(response.dat)
+                resolve(response.data)
             })
             .catch(result=>{
                 context.commit('getFeedFailed',result)

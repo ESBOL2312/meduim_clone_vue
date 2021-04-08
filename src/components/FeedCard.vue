@@ -21,10 +21,10 @@
         </el-row>
       </div>
       <a class="preview-link">
-        <h1>
+        <h1 class="mb-0">
           {{feedData.title}}
         </h1>
-        <p>
+        <p class="mt-0">
           {{feedData.description}}
         </p>
         <div v-if="feedData.tagList" class="tag-list">
