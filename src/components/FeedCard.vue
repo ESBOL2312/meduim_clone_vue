@@ -13,9 +13,10 @@
                   {{feedData.createdAt|dateFormat}}
                 </span>
               </div>
-              <button>
-                {{feedData.favoritesCount}}
-              </button>
+              <el-badge :value="feedData.favoritesCount" class="item" type="primary">
+                <el-button type="primary" circle size="small" icon="el-icon-star-on" @click="favorite(feedData.slug)">
+                </el-button>
+              </el-badge>
             </div>     
           </el-col>
         </el-row>
@@ -40,23 +41,30 @@
 </template>
 <script>
 import UserCard from '@/components/UserCard.vue'
+import feedApi from '@/api/feed'
 export default {
-   name: 'MUserCard',
-   props:{
-       feedData:{
-           type: Object,
-           required: true
-       }
-    },
-    components:{
-      UserCard
-    },
-    filters:{
-      dateFormat:(date)=>{
-        if (!date) return ''
-        return new Date(date).toLocaleDateString()
+  name: 'MUserCard',
+  props:{
+      feedData:{
+          type: Object,
+          required: true
       }
+  },
+  components:{
+    UserCard
+  },
+  filters:{
+    dateFormat:(date)=>{
+      if (!date) return ''
+      return new Date(date).toLocaleDateString()
     }
+  },
+  methods:{
+    favorite(slug){
+      feedApi.favoriteFeed(slug)
+      console.log('a')
+    }
+  }
 }
 </script>
 <style>
@@ -70,9 +78,11 @@ export default {
 }
 .ju-r{
   justify-content: flex-end;
+  align-items: center;
+  gap: 15px;
 }
 .tag-list .el-tag+.el-tag {
-    margin-left: 10px;
-    margin-bottom: 10px;
+  margin-left: 10px;
+  margin-bottom: 10px;
 }
 </style>

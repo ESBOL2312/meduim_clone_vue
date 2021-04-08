@@ -72,9 +72,7 @@ export default {
     .then((data)=>{
       this.loading = false
     })
-    console.log(a)
     this.getTag()
-    console.log(a)
 
   }
 }

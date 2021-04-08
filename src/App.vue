@@ -1,11 +1,11 @@
 <template>
-  <div id="app" class="container mx-auto">
+  <div id="app">
     <el-container>
       <el-header>
         <header-top :menu-list="menuItems" :user-info="currentUser">
         </header-top>
       </el-header>
-      <el-main>
+      <el-main class="container mt-2">
         <router-view/>
       </el-main>
     </el-container>

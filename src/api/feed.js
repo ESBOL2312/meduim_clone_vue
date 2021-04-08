@@ -1,9 +1,11 @@
 import axios from '@/api/axios.js'
 
-
 const getFeed = ({limit,offset}) => {
-    console.log(limit, offset)
     return axios.get(`/articles?limit=${limit}&offset=${offset}`)
+}
+
+const favoriteFeed = (slug) => {
+    return axios.post(`/articles/${slug}/favorite`)
 }
 
 const getSingleFeed = (slug) => {
@@ -11,5 +13,6 @@ const getSingleFeed = (slug) => {
 }
 export default {
     getFeed,
-    getSingleFeed
+    getSingleFeed,
+    favoriteFeed
 }
