@@ -36,7 +36,9 @@
             </el-tag>
         </div>
         <br>
-        <span>Read more...</span>
+        <router-link :to="{name:'article',params:{slug:feedData.slug}}">
+          <span>Read more...</span>
+        </router-link>
       </a>
       <hr>
     </div>

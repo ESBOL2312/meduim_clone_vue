@@ -1,6 +1,5 @@
 <template>
   <el-badge :value="favoritesCount" class="item" type="primary">
-    {{isFavorited}}
     <el-button :loading="loading" :type="btntype" circle size="small" icon="el-icon-star-on" @click="favorite(favoriteSlug)">
     </el-button>
   </el-badge>

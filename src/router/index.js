@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Register from '@/views/Register'
 import Login from '@/views/logIn'
+import Feed from '@/views/Feed'
 
 Vue.use(VueRouter)
 
@@ -22,6 +23,13 @@ const routes = [
     name: 'login',
     component:Login
   },
+  {
+    path: '/article/:slug',
+    name: 'article',
+    component:Feed
+  },
+
+  //template
   {
     path: '/register',
     name: 'new-article',
