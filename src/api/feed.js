@@ -4,8 +4,9 @@ const getFeed = ({limit,offset}) => {
     return axios.get(`/articles?limit=${limit}&offset=${offset}`)
 }
 
-const favoriteFeed = (slug) => {
-    return axios.post(`/articles/${slug}/favorite`)
+const favoriteFeed = (slug,type) => {
+
+    return type ? axios.delete(`/articles/${slug}/favorite`):axios.post(`/articles/${slug}/favorite`)
 }
 
 const getSingleFeed = (slug) => {

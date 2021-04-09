@@ -13,10 +13,12 @@
                   {{feedData.createdAt|dateFormat}}
                 </span>
               </div>
-              <el-badge :value="feedData.favoritesCount" class="item" type="primary">
-                <el-button type="primary" circle size="small" icon="el-icon-star-on" @click="favorite(feedData.slug)">
-                </el-button>
-              </el-badge>
+              <favorite-btn
+                  :favorite-count="feedData.favoritesCount"
+                  :is-favorite = "feedData.favorited"
+                  :favorite-slug="feedData.slug"
+              >
+              </favorite-btn>
             </div>     
           </el-col>
         </el-row>
@@ -41,7 +43,8 @@
 </template>
 <script>
 import UserCard from '@/components/UserCard.vue'
-import feedApi from '@/api/feed'
+import FavoriteBtn from '@/components/FavoriteBtn'
+
 export default {
   name: 'MUserCard',
   props:{
@@ -51,7 +54,8 @@ export default {
       }
   },
   components:{
-    UserCard
+    UserCard,
+    FavoriteBtn
   },
   filters:{
     dateFormat:(date)=>{
@@ -60,10 +64,6 @@ export default {
     }
   },
   methods:{
-    favorite(slug){
-      feedApi.favoriteFeed(slug)
-      console.log('a')
-    }
   }
 }
 </script>
