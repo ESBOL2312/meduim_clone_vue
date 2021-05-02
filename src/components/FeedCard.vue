@@ -30,10 +30,8 @@
         <p class="mt-0">
           {{feedData.description}}
         </p>
-        <div v-if="feedData.tagList" class="tag-list">
-            <el-tag v-for="(tag,c) in feedData.tagList" :key="c" effect="dark">
-              {{tag}}
-            </el-tag>
+        <div v-if="feedData.tagList">
+          <tag-list :tag-list="feedData.tagList"></tag-list>
         </div>
         <br>
         <router-link :to="{name:'article',params:{slug:feedData.slug}}">
@@ -46,6 +44,7 @@
 <script>
 import UserCard from '@/components/UserCard.vue'
 import FavoriteBtn from '@/components/FavoriteBtn'
+import TagList from '@/components/TagList'
 
 export default {
   name: 'MUserCard',
@@ -57,7 +56,8 @@ export default {
   },
   components:{
     UserCard,
-    FavoriteBtn
+    FavoriteBtn,
+    TagList
   },
   filters:{
     dateFormat:(date)=>{

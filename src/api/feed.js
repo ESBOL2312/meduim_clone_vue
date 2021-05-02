@@ -1,11 +1,10 @@
 import axios from '@/api/axios.js'
 
-const getFeed = ({limit,offset}) => {
-    return axios.get(`/articles?limit=${limit}&offset=${offset}`)
+const getFeed = (url) => {
+    return axios.get(url)
 }
 
 const favoriteFeed = (slug,type) => {
-
     return type ? axios.delete(`/articles/${slug}/favorite`):axios.post(`/articles/${slug}/favorite`)
 }
 

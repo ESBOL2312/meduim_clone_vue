@@ -16,6 +16,7 @@ const mutations = {
     getFeedStart(state){
         state.getFeedLoading = true
         state.feedErrors = null
+        state.feed = null
     },
     getFeedSuccess(state, payload){
         state.getFeedLoading = false
@@ -32,10 +33,10 @@ const mutations = {
 }
 
 const actions = {
-    getFeed(context,param){
+    getFeed(context,url){
         return new Promise(resolve=>{
             context.commit('getFeedStart')
-            feedApi.getFeed(param)
+            feedApi.getFeed(url)
             .then(response=>{
                 context.commit('getFeedSuccess',response.data)
                 resolve(response.data)

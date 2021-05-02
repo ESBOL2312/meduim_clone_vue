@@ -8,12 +8,11 @@
             <feed-card :feed-data="article"></feed-card>
           </div>
         </div>
-        <el-pagination
-          background
-          layout="prev, pager, next"
+        <feed-paginator 
           :total="500"
-          @current-change="handleCurrentChange" v-loading.fullscreen.lock="loading">
-        </el-pagination>
+          :limit="10"
+          url="/">
+        </feed-paginator>
       </div>
     </el-col>
     <el-col :span="8">
@@ -31,17 +30,21 @@
 <script>
 import FeedCard from '@/components/FeedCard.vue'
 import UserCard from '@/components/UserCard.vue'
+import FeedPaginator from '@/components/Paginator.vue'
 import {mapActions, mapGetters} from 'vuex'
+import {parseUrl, stringify} from 'query-string'
 export default {
   name: 'Home',
   data(){
     return{
-      loading:false
+      loading:false,
+      url:'/articles'
     }
   },
   components: {
     FeedCard,
-    UserCard
+    UserCard,
+    FeedPaginator
   },
   filters:{
   
@@ -52,28 +55,39 @@ export default {
       'getFL',
       'tags'
     ]),
+    CurrentPage(){
+      return Number(this.$route.query.page || 1)
+    }
+  },
+  watch:{
+    CurrentPage(){
+      this.fetchFeed()
+    }
   },
   methods:{    
     ...mapActions([
       'getFeed',
       'getTag'
     ]),
-    handleCurrentChange(val){
-      let off = (val-1)*10;
+    fetchFeed(){
+      const psl = parseUrl(this.url)
+      const sf = stringify({
+        limit:10,
+        offset:(this.CurrentPage-1)*10,
+        ...psl.query
+      })
+      const aUrl = `${psl.url}?${sf}`
       this.loading = true
-      this.getFeed({limit:10,offset:off}).then((data)=>{
+      
+      this.getFeed(aUrl)
+      .then((data)=>{
         this.loading = false
       })
-    }
+    },
   },
   created(){
-    this.loading = true
-    this.getFeed({limit:10,offset:0})
-    .then((data)=>{
-      this.loading = false
-    })
+    this.fetchFeed()
     this.getTag()
-
   }
 }
 </script>
