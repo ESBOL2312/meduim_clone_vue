@@ -1,39 +1,38 @@
 <template>
-    <el-pagination
-        background
-        layout="prev, pager, next"
-        :total="500"
-        @current-change="handleCurrentChange" v-loading.fullscreen.lock="loading">
-    </el-pagination>
+  <el-pagination
+    background
+    :current-page="current"
+    layout="prev, pager, next"
+    :total="total"
+    @current-change="handleCurrentChange"
+  >
+  </el-pagination>
 </template>
 <script>
 export default {
-    name: 'MPaginator',
-    props:{
-        total:{
-            required: true,
-            type: Number
-        },
-        limit:{
-            required: true,
-            type: Number
-        },
-        url:{
-            required: true,
-            type: String
-        }
+  name: "MPaginator",
+  props: {
+    total: {
+      required: true,
+      type: Number,
     },
-    methods:{
-        handleCurrentChange(val){
-            // let off = (val-1)*10;
-            // this.loading = true
-            // this.getFeed({limit:10,offset:off}).then((data)=>{
-            //     this.loading = false
-            // })
-            this.$router.push({path:this.url,query:{page:val}})
-            console.log(val)
-        }
-    }
-
-}
+    limit: {
+      required: true,
+      type: Number,
+    },
+    url: {
+      required: true,
+      type: String,
+    },
+    current: {
+      required: true,
+      type: Number,
+    },
+  },
+  methods: {
+    handleCurrentChange(val) {
+      this.$router.push({ path: this.url, query: { page: val } });
+    },
+  },
+};
 </script>
