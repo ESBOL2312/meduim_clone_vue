@@ -8,20 +8,17 @@
                 </div>
             </el-col>
             <el-col :span="8">
-                <div v-if="!!tags" class="grid-content bg-purple">
-                    <div class="tag-list">
-                        <el-tag v-for="tag in tags" :key="tag">
-                            {{ tag }}
-                        </el-tag>
-                    </div>
+                <div>
+                    sdfsdf
+                    <feed-tags></feed-tags>
                 </div>
             </el-col>
         </el-row>
     </div>
 </template>
 <script>
-import { mapActions, mapGetters } from "vuex";
 import FeedMain from "@/components/Feed.vue";
+import FeedTags from "@/components/Tags.vue";
 export default {
     name: "Home",
     data() {
@@ -31,15 +28,12 @@ export default {
     },
     components: {
         FeedMain,
+        FeedTags,
     },
     computed: {
-        ...mapGetters(["tags"]),
-    },
-    methods: {
-        ...mapActions(["getTag"]),
-    },
-    created() {
-        this.getTag();
+        loading() {
+            return this.$store.state.feed.getFeedLoading;
+        },
     },
 };
 </script>

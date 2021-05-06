@@ -1,5 +1,5 @@
 <template>
-    <el-col v-loading="loading">
+    <el-col>
         <div v-if="getFeedList">
             <div v-for="(article, i) in getFeedList.articles" :key="i">
                 <feed-card :feed-data="article"></feed-card>
@@ -17,9 +17,6 @@ import { mapActions, mapGetters } from "vuex";
 import { parseUrl, stringify } from "query-string";
 export default {
     name: "MFeed",
-    data() {
-        return {};
-    },
     props: {
         total: {
             required: true,
@@ -42,11 +39,7 @@ export default {
     computed: {
         ...mapGetters(["getFeedList"]),
         CurrentPage() {
-            console.log(11);
             return Number(this.$route.query.page || 1);
-        },
-        loading() {
-            return this.$store.state.feed.getFeedLoading;
         },
         baseUrl() {
             return this.$route.path;
@@ -71,7 +64,11 @@ export default {
         },
     },
     created() {
+        console.log(22);
         this.fetchFeed();
+    },
+    mounted() {
+        console.log(33);
     },
 };
 </script>
