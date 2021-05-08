@@ -19,16 +19,21 @@
 import FeedMain from "@/components/Feed.vue";
 import FeedTags from "@/components/Tags.vue";
 export default {
-    name: "Home",
+    name: "ArticleByTag",
     data() {
         return {
-            apiUrl: "articles/",
+            apiUrl: `articles/?tag=${this.$route.params.slug}`,
         };
     },
     components: {
         FeedMain,
         FeedTags,
     },
-    computed: {},
+    computed: {
+        tag() {
+            console.log(this.$route.params.slug);
+            return this.$route.params.slug;
+        },
+    },
 };
 </script>

@@ -15,6 +15,7 @@ const getters = {
 const mutations = {
     getFeedStart(state){
         state.feed = null
+        state.feedList = null
         state.getFeedLoading = true
         state.feedErrors = null
     },

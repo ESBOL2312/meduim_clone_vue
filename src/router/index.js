@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 import Register from '@/views/Register'
 import Login from '@/views/logIn'
 import Feed from '@/views/Feed'
+import Tag from '@/views/Tag'
 
 Vue.use(VueRouter)
 
@@ -28,7 +29,11 @@ const routes = [
     name: 'article',
     component:Feed
   },
-
+  {
+    path: '/tag/:slug',
+    name: 'tag',
+    component:Tag
+  },
   //template
   {
     path: '/register',

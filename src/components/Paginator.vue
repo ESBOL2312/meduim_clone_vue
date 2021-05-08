@@ -1,16 +1,21 @@
 <template>
-    <el-pagination
-        background
-        :current-page="current"
-        layout="prev, pager, next"
-        :total="total"
-        @current-change="handleCurrentChange"
-    >
-    </el-pagination>
+    <div>
+        <el-pagination
+            background
+            :current-page="current"
+            layout="prev, pager, next"
+            :total="total"
+            @current-change="handleCurrentChange"
+        >
+        </el-pagination>
+    </div>
 </template>
 <script>
 export default {
     name: "MPaginator",
+    data() {
+        return {};
+    },
     props: {
         total: {
             required: true,

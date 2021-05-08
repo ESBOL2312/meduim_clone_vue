@@ -6,7 +6,8 @@ const state = {
 }
 const getters = {
     tagLoadState: state => state.tagsLoading,
-    tagsGet:state=> state.tags['tags']
+    tagsGet:state=> state.tags
+
 }
 const mutations = {
     getTagsStart(state){
@@ -28,8 +29,8 @@ const actions = {
             context.commit('getTagsStart')
             tagApi.getTags()
             .then(response=>{
-                context.commit('getTagsSuccess',response.data)
-                resolve(response.dat)
+                context.commit('getTagsSuccess',response.data.tags)
+                resolve(response.data)
             })
             .catch(result=>{
                 context.commit('getFeedFailed',result)

@@ -1,12 +1,19 @@
 <template>
     <el-col>
-        <div v-if="getFeedList">
+        <div v-if="!getFL">
             <div v-for="(article, i) in getFeedList.articles" :key="i">
                 <feed-card :feed-data="article"></feed-card>
             </div>
+            <feed-paginator
+                :total="total"
+                :current="CurrentPage"
+                :urll="baseUrl"
+            >
+            </feed-paginator>
         </div>
-        <feed-paginator :total="total" :current="CurrentPage" :urll="baseUrl">
-        </feed-paginator>
+        <div v-else>
+            loading.....
+        </div>
     </el-col>
 </template>
 <script>
@@ -17,6 +24,9 @@ import { mapActions, mapGetters } from "vuex";
 import { parseUrl, stringify } from "query-string";
 export default {
     name: "MFeed",
+    data() {
+        return { loading: false };
+    },
     props: {
         total: {
             required: true,
@@ -37,7 +47,7 @@ export default {
         FeedPaginator,
     },
     computed: {
-        ...mapGetters(["getFeedList"]),
+        ...mapGetters(["getFeedList", "getFL"]),
         CurrentPage() {
             return Number(this.$route.query.page || 1);
         },
@@ -60,15 +70,11 @@ export default {
                 ...psl.query,
             });
             const aUrl = `${psl.url}?${sf}`;
-            this.getFeed(aUrl);
+            this.getFeed(aUrl).then((this.loading = true));
         },
     },
     created() {
-        console.log(22);
         this.fetchFeed();
-    },
-    mounted() {
-        console.log(33);
     },
 };
 </script>
