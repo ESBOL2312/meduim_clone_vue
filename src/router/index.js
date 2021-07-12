@@ -5,6 +5,7 @@ import Register from '@/views/Register'
 import Login from '@/views/logIn'
 import Feed from '@/views/Feed'
 import Tag from '@/views/Tag'
+import FollowFeed from '@/views/FollowFeed'
 
 Vue.use(VueRouter)
 
@@ -33,6 +34,11 @@ const routes = [
     path: '/tag/:slug',
     name: 'tag',
     component:Tag
+  },
+  {
+    path: '/feed',
+    name: 'feed',
+    component: FollowFeed
   },
   //template
   {

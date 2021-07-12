@@ -14,7 +14,7 @@
                     <div class="flex ju-r">
                         <div class="info">
                             <span class="">
-                                {{ feedData.createdAt | dateFormat }}
+                                {{ feedData.createdAt | dateF }}
                             </span>
                         </div>
                         <favorite-btn
@@ -48,12 +48,13 @@
     </div>
 </template>
 <script>
-import UserCard from '@/components/UserCard.vue';
-import FavoriteBtn from '@/components/FavoriteBtn';
-import TagList from '@/components/TagList';
+import UserCard from "@/components/UserCard.vue";
+import FavoriteBtn from "@/components/FavoriteBtn";
+import TagList from "@/components/TagList";
+import { dateFormat } from "@/service/index";
 
 export default {
-    name: 'MUserCard',
+    name: "MUserCard",
     props: {
         feedData: {
             type: Object,
@@ -66,10 +67,7 @@ export default {
         TagList,
     },
     filters: {
-        dateFormat: (date) => {
-            if (!date) return '';
-            return new Date(date).toLocaleDateString();
-        },
+        dateF: dateFormat,
     },
     methods: {},
 };

@@ -1,15 +1,17 @@
 <template>
     <el-col>
-        <div v-if="!getFL">
-            <div v-for="(article, i) in getFeedList.articles" :key="i">
-                <feed-card :feed-data="article"></feed-card>
-            </div>
-            <feed-paginator
-                :total="total"
-                :current="CurrentPage"
-                :urll="baseUrl"
-            >
-            </feed-paginator>
+        <div v-if="getFeedList">
+            <template v-if="getFeedList.articlesCount > 0">
+                <div v-for="(article, i) in getFeedList.articles" :key="i">
+                    <feed-card :feed-data="article"></feed-card>
+                </div>
+                <feed-paginator
+                    :total="getFeedList.articlesCount"
+                    :current="CurrentPage"
+                    :urll="baseUrl"
+                >
+                </feed-paginator>
+            </template>
         </div>
         <div v-else>
             loading.....
@@ -22,6 +24,7 @@ import UserCard from "@/components/UserCard.vue";
 import FeedPaginator from "@/components/Paginator.vue";
 import { mapActions, mapGetters } from "vuex";
 import { parseUrl, stringify } from "query-string";
+
 export default {
     name: "MFeed",
     data() {
@@ -53,12 +56,17 @@ export default {
         },
         baseUrl() {
             return this.$route.path;
-        },
+        }
     },
     watch: {
         CurrentPage() {
             this.fetchFeed();
         },
+
+        url:function(){
+            this.fetchFeed();
+        }
+
     },
     methods: {
         ...mapActions(["getFeed"]),

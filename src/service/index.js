@@ -14,3 +14,7 @@ export const setItem = (key,value)=>{
         console.log('set error', error)
     }
 }
+export const dateFormat=(val)=>{
+    if (!val) return '';
+    return new Date(val).toLocaleDateString();
+}

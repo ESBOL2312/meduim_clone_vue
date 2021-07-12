@@ -24,7 +24,7 @@ export default {
     name: "Home",
     data() {
         return {
-            apiUrl: "articles/",
+            apiUrl: "articles/feed",
         };
     },
     components: {

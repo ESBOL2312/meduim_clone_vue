@@ -2,8 +2,9 @@
     <div class="home">
         <el-row :gutter="20">
             <el-col :span="16">
+                <feed-switch :tag="tag"></feed-switch>
                 <div class="grid-content bg-purple">
-                    <feed-main :total="500" :limit="10" :url="apiUrl">
+                    <feed-main :total="500" :limit="10" :url="apiurl">
                     </feed-main>
                 </div>
             </el-col>
@@ -18,6 +19,7 @@
 <script>
 import FeedMain from "@/components/Feed.vue";
 import FeedTags from "@/components/Tags.vue";
+import FeedSwitch from "@/components/FeedSwitch.vue";
 export default {
     name: "ArticleByTag",
     data() {
@@ -28,12 +30,15 @@ export default {
     components: {
         FeedMain,
         FeedTags,
+        FeedSwitch,
     },
     computed: {
         tag() {
-            console.log(this.$route.params.slug);
             return this.$route.params.slug;
         },
+        apiurl(){
+            return `articles/?tag=${this.$route.params.slug}`
+        }
     },
 };
 </script>
